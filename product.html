@@ -112,16 +112,29 @@ Back
 <div class="product-container">
 
 
-<div class="product-image">
+<div class="product-gallery">
 
-<img src="watch1.jpg" alt="GRIND N GOLD Watch">
+<img id="mainImage" src="watch1.jpg" alt="GRIND N GOLD Watch">
 
 </div>
 
 
 
-<div class="product-info">
+<div class="thumbnails">
+<div class="product-gallery">
 
+    <img id="mainImage" src="watch1.jpg" alt="GRIND N GOLD Watch">
+
+    <div class="thumbnails">
+        <img src="watch1.jpg" onclick="changeImage('watch1.jpg')">
+        <img src="watch2.jpg" onclick="changeImage('watch2.jpg')">
+        <img src="watch3.jpg" onclick="changeImage('watch3.jpg')">
+        <img src="watch4.jpg" onclick="changeImage('watch4.jpg')">
+        <img src="watch5.jpg" onclick="changeImage('watch5.jpg')">
+        <img src="watch6.jpg" onclick="changeImage('watch6.jpg')">
+    </div>
+
+</div>
 <h1>
 GRIND N GOLD Classic Watch
 </h1>
@@ -175,7 +188,12 @@ Keep grinding. Keep moving. Keep building.
 
 </footer>
 
-
+<script> 
+function changeImage(image) {
+    document.getElementById("mainImage").scr =
+image;
+}
+</script>
 </body>
 
 </html>
