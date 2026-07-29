@@ -171,7 +171,8 @@
 
 </div>
 
-<button class="payment-button">
+<button class="payment-button"
+onclick="validateCheckout()"> 
 
 Proceed to Payment
 
@@ -206,6 +207,32 @@ cart.forEach(product => {
 
 document.getElementById("orderTotal").innerHTML = "$" + total.toFixed(2);
 
+
+function validateCheckout() {
+
+    let name = document.querySelector('input[type="text"]').value;
+    let email = document.querySelector('input[type="email"]').value;
+    let phone = document.querySelector('input[type="tel"]').value;
+
+    if (name === "" || email === "" || phone === "") {
+
+        alert("Please fill in your name, email, and phone number.");
+
+        return;
+
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+
+        alert("Please enter a valid email address.");
+
+        return;
+
+    }
+
+    alert("Information looks good! Next we'll connect the payment system.");
+
+}
 </script>
 
 </body>
