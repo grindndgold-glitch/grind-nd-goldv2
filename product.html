@@ -272,18 +272,35 @@ function changeQuantity(amount) {
 
 }
 
- function addToCart() {
+function addToCart() {
 
-    let quantity = document.getElementById("quantity").value;
+    let quantity = Number(document.getElementById("quantity").value);
 
     let product = {
         name: "GRIND N GOLD Classic Watch",
         price: 29.99,
-        image: document.getElementById("mainImage").getAttribute("data-image"),      
+        image: document.getElementById("mainImage").getAttribute("data-image"),
         quantity: quantity
     };
 
-    localStorage.setItem("cart", JSON.stringify(product));
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existingProduct = cart.find(item =>
+        item.name === product.name &&
+        item.image === product.image
+    );
+
+    if (existingProduct) {
+
+        existingProduct.quantity += quantity;
+
+    } else {
+
+        cart.push(product);
+
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
 
     alert("Added to cart!");
 
