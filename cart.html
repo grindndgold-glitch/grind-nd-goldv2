@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -31,38 +32,102 @@
     margin-bottom: 30px;
 }
 
+
 .cart-item {
+
     display: flex;
     align-items: center;
-    gap: 25px;
+    justify-content: space-between;
+    gap: 20px;
+
+    background: #080808;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
 }
 
+
 .cart-item img {
+
     width: 120px;
     height: 120px;
     object-fit: contain;
-    background: #080808;
     border-radius: 8px;
+
 }
+
 
 .cart-info h2 {
+
     color: white;
+
 }
+
 
 .cart-info p {
+
     color: #aaa;
+
 }
 
-.checkout-button {
-    display: block;
+
+.quantity-control {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+
+.quantity-control button {
+
+    width: 30px;
+    height: 30px;
+    background: #d4af37;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+
+.remove-button {
+
+    background: crimson;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+
+.total {
+
+    color: #d4af37;
+    font-size: 24px;
+    font-weight: bold;
     margin-top: 30px;
+
+}
+
+
+.checkout-button {
+
+    display: block;
+    margin-top: 25px;
     background: #d4af37;
     color: black;
     text-align: center;
     padding: 14px;
     border-radius: 5px;
     font-weight: bold;
+
 }
+
 
 </style>
 
@@ -78,31 +143,41 @@
 GRIND N GOLD
 </a>
 
+
 <a href="shop.html" class="cart">
-Back
+Shop
 </a>
 
 </nav>
 
 
+
 <section class="cart-page">
 
+
 <div class="cart-container">
+
 
 <h1>Your Cart</h1>
 
 
-<div id="cartItem">
+<div id="cartItems">
 
 </div>
 
 
-<a href="#" class="checkout-button">
+<div class="total" id="totalPrice">
+
+</div>
+
+
+<a href="checkout.html" class="checkout-button">
 CHECKOUT
 </a>
 
 
 </div>
+
 
 </section>
 
@@ -110,16 +185,35 @@ CHECKOUT
 
 <script>
 
+
 let cart = JSON.parse(localStorage.getItem("cart"));
 
 
-if(cart){
+function displayCart(){
 
-document.getElementById("cartItem").innerHTML = `
+
+let cartItems = document.getElementById("cartItems");
+
+
+if(!cart){
+
+cartItems.innerHTML = "<p>Your cart is empty.</p>";
+
+document.getElementById("totalPrice").innerHTML = "";
+
+return;
+
+}
+
+
+
+cartItems.innerHTML = `
 
 <div class="cart-item">
 
+
 <img src="${cart.image}">
+
 
 <div class="cart-info">
 
@@ -127,23 +221,82 @@ document.getElementById("cartItem").innerHTML = `
 
 <p>Price: $${cart.price}</p>
 
-<p>Quantity: ${cart.quantity}</p>
+
+<div class="quantity-control">
+
+<button onclick="changeQuantity(-1)">-</button>
+
+<p>${cart.quantity}</p>
+
+<button onclick="changeQuantity(1)">+</button>
 
 </div>
+
+
+</div>
+
+
+<button class="remove-button" onclick="removeItem()">
+Remove
+</button>
+
 
 </div>
 
 `;
 
+
+let total = cart.price * cart.quantity;
+
+
+document.getElementById("totalPrice").innerHTML =
+"Total: $" + total.toFixed(2);
+
+
 }
 
 
-else {
 
-document.getElementById("cartItem").innerHTML = 
-"<p>Your cart is empty.</p>";
+function changeQuantity(amount){
+
+
+cart.quantity = Number(cart.quantity) + amount;
+
+
+if(cart.quantity < 1){
+
+cart.quantity = 1;
 
 }
+
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+
+displayCart();
+
+
+}
+
+
+
+function removeItem(){
+
+
+localStorage.removeItem("cart");
+
+
+cart = null;
+
+
+displayCart();
+
+
+}
+
+
+
+displayCart();
 
 
 </script>
