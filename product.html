@@ -162,7 +162,7 @@ Cart
 
 <div class="product-gallery">
 
-    <img id="mainImage" src="watch1.jpg" alt="GRIND N GOLD Watch">
+    <img id="mainImage" src="watch1.jpg" alt="GRIND N GOLD Watch" data-image="watch1.jpg"> 
 
     <div class="thumbnails">
         <img src="watch1.jpg" onclick="changeImage('watch1.jpg')">
@@ -246,7 +246,13 @@ Keep grinding. Keep moving. Keep building.
 <script>
 
 function changeImage(image) {
-    document.getElementById("mainImage").src = image;
+
+    let mainImage = document.getElementById("mainImage");
+
+    mainImage.src = image;
+
+    mainImage.setAttribute("data-image", image);
+
 }
 
 
@@ -273,7 +279,7 @@ function changeQuantity(amount) {
     let product = {
         name: "GRIND N GOLD Classic Watch",
         price: 29.99,
-        image: "watch1.jpg",
+        image: document.getElementById("mainImage").getAttribute("data-image"),      
         quantity: quantity
     };
 
