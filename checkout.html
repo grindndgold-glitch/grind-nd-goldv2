@@ -145,7 +145,7 @@
 
 <label>Country</label>
 
-<select>
+<select id="country"> 
 
 <option>United States</option>
 <option>Canada</option>
@@ -242,7 +242,30 @@ function validateCheckout() {
 
     }
 
-    alert("Information looks good! Next we'll connect the payment system.");
+let order = {
+
+    customer: {
+        name: name,
+        email: email,
+        phone: phone,
+        address: address,
+        city: city,
+        state: state,
+        zip: zip,
+        country: document.getElementById("country").value
+    },
+
+    products: cart,
+
+    total: total
+
+};
+
+
+localStorage.setItem("order", JSON.stringify(order));
+
+
+alert("Order information saved! Ready for payment.");
 
 }
 </script>
