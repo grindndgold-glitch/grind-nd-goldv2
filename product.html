@@ -86,8 +86,34 @@
     border-radius: 5px;
     font-weight: bold;
 }
+.quantity-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+    color: #aaa;
+}
 
-@media(max-width:700px){
+.quantity-box button {
+    width: 35px;
+    height: 35px;
+    background: #d4af37;
+    border: none;
+    border-radius: 5px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.quantity-box input {
+    width: 50px;
+    height: 35px;
+    text-align: center;
+    background: #080808;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+    @media(max-width:700px){
 
 .product-container {
     grid-template-columns: 1fr;
@@ -180,7 +206,7 @@ this watch combines business style with everyday durability.
     
     <label>Quantity:</label>
 
-    <button onclick="changeQuantity(-1)">+</button>
+    <button onclick="changeQuantity(-1)">-</button>
 
     <input type="number" id="quantity" value="1"
 min="1">
@@ -217,11 +243,29 @@ Keep grinding. Keep moving. Keep building.
 
 </footer>
 
-<script> 
+<script>
+
 function changeImage(image) {
-    document.getElementById("mainImage").src =
-image;
+    document.getElementById("mainImage").src = image;
 }
+
+
+function changeQuantity(amount) {
+
+    let quantity = document.getElementById("quantity");
+
+    let currentQuantity = parseInt(quantity.value);
+
+    currentQuantity = currentQuantity + amount;
+
+    if (currentQuantity < 1) {
+        currentQuantity = 1;
+    }
+
+    quantity.value = currentQuantity;
+
+}
+
 </script>
 </body>
 
