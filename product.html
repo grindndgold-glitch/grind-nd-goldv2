@@ -145,7 +145,7 @@ GRIND N GOLD
 
 </ul>
 
-<a href="shop.html" class="cart">
+<a href="cart.html" class="cart">
 Back
 </a>
 
@@ -216,7 +216,7 @@ min="1">
 </div>
     
 
-<a href="#" class="buy-button">
+<a class="buy-button" onclick="addToCart()">
 ADD TO CART
 </a>
 
@@ -265,6 +265,23 @@ function changeQuantity(amount) {
     quantity.value = currentQuantity;
 
 }
+
+ function addToCart() {
+
+    let quantity = document.getElementById("quantity").value;
+
+    let product = {
+        name: "GRIND N GOLD Classic Watch",
+        price: 29.99,
+        image: "watch1.jpg",
+        quantity: quantity
+    };
+
+    localStorage.setItem("cart", JSON.stringify(product));
+
+    alert("Added to cart!");
+
+}   
 
 </script>
 </body>
