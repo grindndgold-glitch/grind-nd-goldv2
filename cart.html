@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GRIND N GOLD Cart</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.cart-page {
+    padding: 60px 7%;
+    display: flex;
+    justify-content: center;
+}
+
+.cart-container {
+    max-width: 900px;
+    width: 100%;
+    background: #111;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #222;
+}
+
+.cart-container h1 {
+    color: #d4af37;
+    margin-bottom: 30px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.cart-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    background: #080808;
+    border-radius: 8px;
+}
+
+.cart-info h2 {
+    color: white;
+}
+
+.cart-info p {
+    color: #aaa;
+}
+
+.checkout-button {
+    display: block;
+    margin-top: 30px;
+    background: #d4af37;
+    color: black;
+    text-align: center;
+    padding: 14px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<a href="index.html" class="logo">
+GRIND N GOLD
+</a>
+
+<a href="shop.html" class="cart">
+Back
+</a>
+
+</nav>
+
+
+<section class="cart-page">
+
+<div class="cart-container">
+
+<h1>Your Cart</h1>
+
+
+<div id="cartItem">
+
+</div>
+
+
+<a href="#" class="checkout-button">
+CHECKOUT
+</a>
+
+
+</div>
+
+</section>
+
+
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart"));
+
+
+if(cart){
+
+document.getElementById("cartItem").innerHTML = `
+
+<div class="cart-item">
+
+<img src="${cart.image}">
+
+<div class="cart-info">
+
+<h2>${cart.name}</h2>
+
+<p>Price: $${cart.price}</p>
+
+<p>Quantity: ${cart.quantity}</p>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+else {
+
+document.getElementById("cartItem").innerHTML = 
+"<p>Your cart is empty.</p>";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
