@@ -1,1 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GRIND N GOLD Checkout</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.checkout-page{
+    padding:60px 7%;
+    display:flex;
+    justify-content:center;
+}
+
+.checkout-container{
+    width:100%;
+    max-width:1100px;
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:40px;
+}
+
+.checkout-form,
+.order-summary{
+    background:#111;
+    border:1px solid #222;
+    border-radius:10px;
+    padding:30px;
+}
+
+.checkout-form h1,
+.order-summary h2{
+    color:#d4af37;
+    margin-bottom:25px;
+}
+
+.checkout-form label{
+    display:block;
+    color:#aaa;
+    margin-top:18px;
+    margin-bottom:8px;
+}
+
+.checkout-form input,
+.checkout-form select{
+    width:100%;
+    padding:12px;
+    background:#080808;
+    color:white;
+    border:1px solid #333;
+    border-radius:5px;
+    box-sizing:border-box;
+}
+
+.summary-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    color:white;
+}
+
+.total{
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid #333;
+    display:flex;
+    justify-content:space-between;
+    font-size:22px;
+    font-weight:bold;
+    color:#d4af37;
+}
+
+.payment-button{
+    width:100%;
+    margin-top:30px;
+    padding:15px;
+    background:#d4af37;
+    color:black;
+    border:none;
+    border-radius:5px;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+}
+
+@media(max-width:800px){
+
+.checkout-container{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html" class="logo">GRIND N GOLD</a>
+
+<a href="cart.html" class="cart">Cart</a>
+
+</nav>
+
+<section class="checkout-page">
+
+<div class="checkout-container">
+
+<div class="checkout-form">
+
+<h1>Checkout</h1>
+
+<label>Full Name</label>
+<input type="text">
+
+<label>Email</label>
+<input type="email">
+
+<label>Phone Number</label>
+<input type="tel">
+
+<label>Street Address</label>
+<input type="text">
+
+<label>Apartment (Optional)</label>
+<input type="text">
+
+<label>City</label>
+<input type="text">
+
+<label>State</label>
+<input type="text">
+
+<label>ZIP Code</label>
+<input type="text">
+
+<label>Country</label>
+
+<select>
+
+<option>United States</option>
+<option>Canada</option>
+<option>United Kingdom</option>
+<option>Australia</option>
+<option>Trinidad and Tobago</option>
+
+</select>
+
+</div>
+
+<div class="order-summary">
+
+<h2>Order Summary</h2>
+
+<div id="orderItems"></div>
+
+<div class="total">
+
+<span>Total</span>
+
+<span id="orderTotal">$0.00</span>
+
+</div>
+
+<button class="payment-button">
+
+Proceed to Payment
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let orderItems = document.getElementById("orderItems");
+
+let total = 0;
+
+cart.forEach(product => {
+
+    total += product.price * product.quantity;
+
+    orderItems.innerHTML += `
+        <div class="summary-item">
+            <span>${product.name} x${product.quantity}</span>
+            <span>$${(product.price * product.quantity).toFixed(2)}</span>
+        </div>
+    `;
+
+});
+
+document.getElementById("orderTotal").innerHTML = "$" + total.toFixed(2);
+
+</script>
+
+</body>
+
+</html>
