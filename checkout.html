@@ -292,13 +292,13 @@ if (!window.paypalRendered) {
 
         onApprove: function(data, actions) {
 
-            return actions.order.capture().then(function(details) {
+    return actions.order.capture().then(function(details) {
 
-                alert("Payment Successful! Thank you " + details.payer.name.given_name + "!");
+        alert("Payment Successful!");
 
-            });
+    });
 
-        }
+}
 
     }).render("#paypal-button-container");
 
