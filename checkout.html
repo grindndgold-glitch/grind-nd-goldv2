@@ -294,10 +294,20 @@ if (!window.paypalRendered) {
 
     return actions.order.capture().then(function(details) {
 
-    console.log("CAPTURED!");
-    console.log(details);
+        console.log("CAPTURED!");
+        console.log(details);
 
-    alert("Payment Successful!");
+        document.querySelector(".order-summary").innerHTML = `
+            <h2 style="color:#d4af37;">Thank You For Your Order!</h2>
+            <p style="color:white;">
+            Your payment was successful, ${details.payer.name.given_name}.
+            </p>
+            <p style="color:white;">
+            GRIND N GOLD appreciates your purchase.
+            </p>
+        `;
+
+        localStorage.removeItem("cart");
 
     });
 
