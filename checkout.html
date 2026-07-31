@@ -298,7 +298,6 @@ if (!window.paypalRendered) {
         
         
 onApprove: function(data, actions) {
-    alert("ON APPROVE WORKED");
 
     return actions.order.capture().then(function(details) {
 
@@ -307,19 +306,21 @@ onApprove: function(data, actions) {
 
         document.getElementById("paypal-button-container").style.display = "none";
 
-        document.querySelector(".order-summary").insertAdjacentHTML("beforeend", `
-            <div id="thank-you-message">
-                <h2 style="color:#d4af37;">Thank You For Your Order!</h2>
+        let thankYou = document.createElement("div");
 
-                <p style="color:white;">
-                Your payment was successful, ${details.payer.name.given_name}.
-                </p>
+        thankYou.innerHTML = `
+            <h2 style="color:#d4af37;">Thank You For Your Order!</h2>
 
-                <p style="color:white;">
-                GRIND N GOLD appreciates your purchase.
-                </p>
-            </div>
-        `);
+            <p style="color:white;">
+            Your payment was successful.
+            </p>
+
+            <p style="color:white;">
+            GRIND N GOLD appreciates your purchase.
+            </p>
+        `;
+
+        document.querySelector(".order-summary").appendChild(thankYou);
 
         localStorage.removeItem("cart");
 
