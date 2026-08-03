@@ -117,7 +117,35 @@
     border-color:#d4af37;
     box-shadow:0 0 10px rgba(212,175,55,.25);
 }
-    
+
+.categories{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:35px;
+}
+
+.category-btn{
+    background:#111;
+    color:white;
+    border:1px solid #333;
+    padding:10px 18px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.3s;
+    font-weight:bold;
+}
+
+.category-btn:hover{
+    border-color:#d4af37;
+    color:#d4af37;
+}
+
+.category-btn.active{
+    background:#d4af37;
+    color:black;
+}
 </style>
 
 </head>
@@ -163,6 +191,34 @@ type="text"
 id="searchInput"
 placeholder="search products..."> 
 </div> 
+
+<div class="categories">
+
+<button class="category-btn active" data-category="all">
+All
+</button>
+
+<button class="category-btn" data-category="watches">
+Watches
+</button>
+
+<button class="category-btn" data-category="jewelry">
+Jewelry
+</button>
+
+<button class="category-btn" data-category="electronics">
+Electronics
+</button>
+
+<button class="category-btn" data-category="home">
+Home
+</button>
+
+<button class="category-btn" data-category="trending">
+Trending
+</button>
+
+</div>
 
 
 <div class="products-grid">
