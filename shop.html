@@ -289,6 +289,7 @@ Keep grinding. Keep moving. Keep building.
 
 const searchInput = document.getElementById("searchInput");
 const products = document.querySelectorAll(".card");
+const categoryButtons= document.querySelectorAll(".category-btn");
 
 searchInput.addEventListener("keyup", function () {
 
@@ -308,6 +309,39 @@ searchInput.addEventListener("keyup", function () {
 
 });
 
+categoryButtons.forEach(function(button){
+
+    button.addEventListener("click", function(){
+
+        categoryButtons.forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        let category = button.dataset.category;
+
+        products.forEach(function(product){
+
+            let name = product.dataset.name.toLowerCase();
+
+            if(category === "all"){
+                product.style.display = "block";
+            }
+
+            else if(name.includes(category)){
+                product.style.display = "block";
+            }
+
+            else{
+                product.style.display = "none";
+            }
+
+        });
+
+    });
+
+});
 </script>
 
 </body>
