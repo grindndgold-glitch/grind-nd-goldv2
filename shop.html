@@ -168,7 +168,7 @@ placeholder="search products...">
 <div class="products-grid">
 
 
-<div class="card">
+<div class="card" data-name="grind n gold classic watch watches"> 
 
 
 <div class="image-box">
@@ -228,7 +228,31 @@ Keep grinding. Keep moving. Keep building.
 </p>
 
 </footer>
+    
+<script>
 
+const searchInput = document.getElementById("searchInput");
+const products = document.querySelectorAll(".card");
+
+searchInput.addEventListener("keyup", function () {
+
+    let search = searchInput.value.toLowerCase();
+
+    products.forEach(function(product) {
+
+        let name = product.dataset.name.toLowerCase();
+
+        if (name.includes(search)) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+
+    });
+
+});
+
+</script>
 
 </body>
 
