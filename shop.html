@@ -93,6 +93,31 @@
     border-radius: 5px;
     font-weight: bold;
 }
+
+.search-box{
+    display:flex;
+    justify-content:center;
+    margin-bottom:35px;
+}
+
+.search-box input{
+    width:100%;
+    max-width:450px;
+    padding:14px 18px;
+    background:#111;
+    color:white;
+    border:1px solid #333;
+    border-radius:30px;
+    outline:none;
+    font-size:16px;
+    transition:.3s;
+}
+
+.search-box input:focus{
+    border-color:#d4af37;
+    box-shadow:0 0 10px rgba(212,175,55,.25);
+}
+    
 </style>
 
 </head>
@@ -130,6 +155,14 @@ Cart (0)
 <h1 class="shop-title">
 SHOP
 </h1>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="search products..."> 
+</div> 
 
 
 <div class="products-grid">
