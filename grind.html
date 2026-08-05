@@ -194,7 +194,7 @@ overflow:hidden;
 margin:10px 0;">
 
 <div style="
-width:${goal.progress}%;
+width:${goal.progress || 0}%;
 height:100%;
 background:#d4af37;">
 </div>
@@ -202,7 +202,7 @@ background:#d4af37;">
 </div>
 
 <p style="color:#999;">
-${goal.progress}% Complete
+${goal.progress || 0}% Complete
 </p>
 
 <div>
