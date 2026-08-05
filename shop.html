@@ -170,7 +170,7 @@ GRIND N GOLD
 
 </ul>
 
-<a href="#" class="cart">
+<a href="cart.html" class="cart" id="cartCount">
 Cart (0)
 </a>
 
@@ -342,6 +342,21 @@ categoryButtons.forEach(function(button){
     });
 
 });
+function updateCartCount() {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let totalItems = 0;
+
+    cart.forEach(function(product) {
+        totalItems += product.quantity;
+    });
+
+    document.getElementById("cartCount").textContent =
+        "Cart (" + totalItems + ")";
+}
+
+updateCartCount();
 </script>
 
 </body>
