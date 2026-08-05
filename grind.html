@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Grind | GRIND N GOLD</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.grind-page{
+    padding:60px 7%;
+    max-width:900px;
+    margin:auto;
+}
+
+.grind-page h1{
+    color:#d4af37;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.grind-page p{
+    text-align:center;
+    color:#999;
+    margin-bottom:35px;
+}
+
+.goal-input{
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.goal-input input{
+    flex:1;
+    padding:14px;
+    background:#111;
+    color:white;
+    border:1px solid #333;
+    border-radius:6px;
+}
+
+.goal-input button{
+    padding:14px 22px;
+    background:#d4af37;
+    color:black;
+    border:none;
+    border-radius:6px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.goal{
+    background:#111;
+    border:1px solid #222;
+    border-radius:8px;
+    padding:18px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.goal.completed{
+    opacity:.6;
+    text-decoration:line-through;
+}
+
+.goal button{
+    background:none;
+    border:none;
+    font-size:20px;
+    cursor:pointer;
+    margin-left:10px;
+}
+
+@media(max-width:700px){
+
+.goal-input{
+    flex-direction:column;
+}
+
+.goal{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html" class="logo">
+GRIND N GOLD
+</a>
+
+<ul class="nav-links">
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="shop.html">Shop</a></li>
+
+<li><a href="index.html#about">About</a></li>
+
+</ul>
+
+<a href="cart.html" class="cart" id="cartCount">
+Cart (0)
+</a>
+
+</nav>
+
+<section class="grind-page">
+
+<h1>MY GRIND</h1>
+
+<p>
+Every goal starts with one step.
+Keep grinding. Keep building.
+</p>
+
+<div class="goal-input">
+
+<input
+type="text"
+id="goalInput"
+placeholder="What are you working towards?">
+
+<button onclick="addGoal()">
+ADD
+</button>
+
+</div>
+
+<div id="goalList"></div>
+
+</section>
+
+<footer>
+
+<h2>
+GRIND N GOLD
+</h2>
+
+<p>
+Keep grinding. Keep moving. Keep building.
+</p>
+
+</footer>
+
+<script>
+
+let goals = JSON.parse(localStorage.getItem("goals")) || [];
+
+function saveGoals(){
+
+    localStorage.setItem("goals", JSON.stringify(goals));
+
+}
+
+function renderGoals(){
+
+    let list = document.getElementById("goalList");
+
+    list.innerHTML = "";
+
+    goals.forEach(function(goal,index){
+
+        list.innerHTML += `
+
+        <div class="goal ${goal.done ? "completed" : ""}">
+
+            <span>${goal.text}</span>
+
+            <div>
+
+                <button onclick="toggleGoal(${index})">
+                ✅
+                </button>
+
+                <button onclick="deleteGoal(${index})">
+                🗑️
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+function addGoal(){
+
+    let input = document.getElementById("goalInput");
+
+    if(input.value.trim() === ""){
+
+        alert("Enter a goal first.");
+
+        return;
+
+    }
+
+    goals.push({
+
+        text: input.value,
+
+        done: false
+
+    });
+
+    input.value = "";
+
+    saveGoals();
+
+    renderGoals();
+
+}
+
+function toggleGoal(index){
+
+    goals[index].done = !goals[index].done;
+
+    saveGoals();
+
+    renderGoals();
+
+}
+
+function deleteGoal(index){
+
+    goals.splice(index,1);
+
+    saveGoals();
+
+    renderGoals();
+
+}
+
+function updateCartCount(){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let totalItems = 0;
+
+    cart.forEach(function(product){
+
+        totalItems += product.quantity;
+
+    });
+
+    document.getElementById("cartCount").textContent =
+    "Cart (" + totalItems + ")";
+
+}
+
+renderGoals();
+
+updateCartCount();
+
+</script>
+
+</body>
+
+</html>
