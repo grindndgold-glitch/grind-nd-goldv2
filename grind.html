@@ -90,7 +90,37 @@
     transform:scale(1.05);
 }
 
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:35px;
+}
+
+.stat-box{
+    background:#111;
+    border:1px solid #222;
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+}
+
+.stat-box h2{
+    color:#d4af37;
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.stat-box p{
+    color:#999;
+    margin:0;
+}
+
 @media(max-width:700px){
+
+.stats{
+    grid-template-columns:1fr;
+}
 
 .goal-input{
     flex-direction:column;
@@ -154,7 +184,26 @@ ADD
 
 </div>
 
-<div id="goalList"></div>
+<div class="stats">
+
+<div class="stat-box">
+<h2 id="goalCount">0</h2>
+<p>Goals</p>
+</div>
+
+<div class="stat-box">
+<h2 id="completedCount">0</h2>
+<p>Completed</p>
+</div>
+
+<div class="stat-box">
+<h2 id="averageProgress">0%</h2>
+<p>Average Progress</p>
+</div>
+
+</div>
+
+<div id="goalList"></div> 
 
 </section>
 
@@ -307,6 +356,36 @@ function deleteGoal(index){
     saveGoals();
 
     renderGoals();
+
+}
+
+function updateStats(){
+
+    let completed = 0;
+    let progress = 0;
+
+    goals.forEach(function(goal){
+
+        if(goal.done){
+            completed++;
+        }
+
+        progress += goal.progress || 0;
+
+    });
+
+    let average = 0;
+
+    if(goals.length > 0){
+        average = Math.round(progress / goals.length);
+    }
+
+    document.getElementById("goalCount").textContent = goals.length;
+
+    document.getElementById("completedCount").textContent = completed;
+
+    document.getElementById("averageProgress").textContent =
+    average + "%";
 
 }
 
