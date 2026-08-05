@@ -77,7 +77,7 @@
     background:#d4af37;
     color:black;
     border:none;
-    border-radius:8px;
+    border-radius:8px
     font-size:18px;
     font-weight:bold;
     cursor:pointer;
@@ -103,6 +103,12 @@
     border-radius:10px;
     padding:20px;
     text-align:center;
+    transition:.3s; 
+}
+
+.stat-box:hover{
+    transform:translateY(-5px);
+    border-color:#d4af37;
 }
 
 .stat-box h2{
@@ -114,6 +120,18 @@
 .stat-box p{
     color:#999;
     margin:0;
+}
+
+.quote-box{
+    background:#111;
+    border:1px solid #222;
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:30px;
+    text-align:center;
+    color:#d4af37;
+    font-style:italic;
+    font-size:18px;
 }
 
 @media(max-width:700px){
@@ -170,6 +188,8 @@ Cart (0)
 Every goal starts with one step.
 Keep grinding. Keep building.
 </p>
+    
+<div id="dailyQuote" class="quote-box"></div>
 
 <div class="goal-input">
 
@@ -256,7 +276,13 @@ margin:10px 0;">
 <div style="
 width:${goal.progress || 0}%;
 height:100%;
-background:#d4af37;">
+background:${
+(goal.progress || 0) < 40
+? "#ff4d4d"
+: (goal.progress || 0) < 70
+? "#f0ad4e"
+: "#28a745"
+};
 </div>
 
 </div>
@@ -319,6 +345,8 @@ function addGoal(){
 
     renderGoals();
 
+     updateStats();
+
 }
 
 function toggleGoal(index){
@@ -328,6 +356,8 @@ function toggleGoal(index){
     saveGoals();
 
     renderGoals();
+
+     updateStats();
 
 }
 
@@ -347,6 +377,8 @@ function changeProgress(index, amount){
 
     renderGoals();
 
+     updateStats();
+
 }
 
 function deleteGoal(index){
@@ -356,6 +388,8 @@ function deleteGoal(index){
     saveGoals();
 
     renderGoals();
+
+    updateStats();
 
 }
 
@@ -389,6 +423,38 @@ function updateStats(){
 
 }
 
+const quotes=[
+
+"Discipline beats motivation.",
+
+"Success is earned.",
+
+"Dream big. Work bigger.",
+
+"The grind never lies.",
+
+"Small progress every day becomes big results.",
+
+"Stay hungry. Stay humble.",
+
+"Keep showing up.",
+
+"The future belongs to the disciplined.",
+
+"You become what you repeat.",
+
+"Keep grinding. Keep building."
+
+];
+
+function loadQuote(){
+
+let random=Math.floor(Math.random()*quotes.length);
+
+document.getElementById("dailyQuote").textContent=quotes[random];
+
+}
+
 function updateCartCount(){
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -407,6 +473,10 @@ function updateCartCount(){
 }
 
 renderGoals();
+
+updateStats();
+
+loadQuote();
 
 updateCartCount();
 
