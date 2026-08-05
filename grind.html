@@ -64,8 +64,9 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
+    overflow:hidden;
 }
-
+    
 .goal.completed{
     opacity:.6;
     text-decoration:line-through;
@@ -77,7 +78,7 @@
     background:#d4af37;
     color:black;
     border:none;
-    border-radius:8px
+    border-radius:8px;
     font-size:18px;
     font-weight:bold;
     cursor:pointer;
@@ -88,6 +89,12 @@
 .goal button:hover{
     background:#f0d878;
     transform:scale(1.05);
+}
+
+.goal-actions{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
 }
 
 .stats{
@@ -292,6 +299,8 @@ ${goal.progress || 0}% Complete
 </p>
 
 <div>
+
+<div class="goal-actions">
 
 <button onclick="changeProgress(${index},-10)">-</button>
 
