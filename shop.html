@@ -222,6 +222,10 @@ Trending
 
 
 <div class="products-grid">
+<div id="noResults" style="display:none; text-align:center; color:#999; padding:40px; width:100%;">
+    <h2>No products found</h2>
+    <p>Try another search or browse a different category.</p>
+</div> 
 
 
 <div class="card" data-name="grind n gold classic watch watches"> 
@@ -290,22 +294,36 @@ Keep grinding. Keep moving. Keep building.
 const searchInput = document.getElementById("searchInput");
 const products = document.querySelectorAll(".card");
 const categoryButtons= document.querySelectorAll(".category-btn");
+const noResults = document.getElementById("noResults"); 
 
 searchInput.addEventListener("keyup", function () {
 
     let search = searchInput.value.toLowerCase();
+
+    let found = false;
 
     products.forEach(function(product) {
 
         let name = product.dataset.name.toLowerCase();
 
         if (name.includes(search)) {
+
             product.style.display = "block";
+            found = true;
+
         } else {
+
             product.style.display = "none";
+
         }
 
     });
+
+    if(found){
+        noResults.style.display = "none";
+    }else{
+        noResults.style.display = "block";
+    }
 
 });
 
