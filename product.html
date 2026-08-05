@@ -302,9 +302,28 @@ function addToCart() {
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    alert("Added to cart!");
+        alert("Added to cart!");
+
+    updateCartCount();
 
 }
+
+function updateCartCount() {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let totalItems = 0;
+
+    cart.forEach(function(product) {
+        totalItems += product.quantity;
+    });
+
+    document.getElementById("cartCount").textContent = "Cart (" + totalItems + ")";
+
+}
+
+updateCartCount();
+
 </script>
 </body>
 
